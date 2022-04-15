@@ -54,8 +54,6 @@ public class FormTests {
                 .setCity()
                 .submit();
 
-        Selenide.sleep(20000);
-
         automationPracticeForm.registrationTable.shouldHave(
                 text("Student Name" + " " + studentFirstName + " " + studentLastName +
                         "\nStudent Email" + " " + studentEmail +
