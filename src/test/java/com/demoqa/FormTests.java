@@ -72,7 +72,6 @@ public class FormTests {
                 .setState(state)
                 .setCity(city)
                 .submit();
-        System.out.println(automationPracticeForm.registrationTable);
         Assertions.assertTrue(automationPracticeForm.isStudentRegistered(
                 studentFirstName,
                 studentLastName,
