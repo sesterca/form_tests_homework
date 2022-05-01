@@ -1,4 +1,4 @@
-package com.demoqa;
+package com.demoqa.testdata;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;

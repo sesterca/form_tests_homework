@@ -23,11 +23,18 @@ public class FormTests {
     public String studentFirstName;
     public String studentLastName;
     public String studentEmail;
+    public String male;
     public String phoneNumber;
+    public String hobby;
+    public String subject;
     public String studentAddress;
     public String dayOfBirthday;
     public String monthOfBirthday;
     public String yearOfBirthday;
+    public String state;
+    public String city;
+    public String fileName;
+
 
     @BeforeEach
     public void setUp(){
@@ -37,8 +44,14 @@ public class FormTests {
         studentFirstName = studentMap.get("Student firstName");
         studentLastName = studentMap.get("Student lastName");
         studentEmail = studentMap.get("Student Email");
+        male = studentMap.get("Male");
         phoneNumber = studentMap.get("Mobile");
+        fileName = "picture.png";
+        hobby = studentMap.get("Hobbie");
+        subject = studentMap.get("Subject");
         studentAddress = studentMap.get("Address");
+        state = studentMap.get("State");
+        city = studentMap.get("City");
         dayOfBirthday = studentMap.get("Birthday day");
         monthOfBirthday = studentMap.get("Birthday month");
         yearOfBirthday = studentMap.get("Birthday year");
@@ -49,20 +62,31 @@ public class FormTests {
         AutomationPracticeForm automationPracticeForm = open(AutomationPracticeForm.FORM_PAGE, AutomationPracticeForm.class)
                 .setName(studentFirstName, studentLastName)
                 .setEmail(studentEmail)
-                .setFemale()
+                .setMale(male)
                 .setPhone(phoneNumber)
                 .setBirthday(dayOfBirthday, monthOfBirthday, yearOfBirthday)
-                .setSubject()
-                .setReadingHobby()
-                .uploadPicture()
+                .setSubject(subject)
+                .setHobby(hobby)
+                .uploadPicture(fileName)
                 .setAddress(studentAddress)
-                .setState()
-                .setCity()
+                .setState(state)
+                .setCity(city)
                 .submit();
-        System.out.println(yearOfBirthday);
-        Assertions.assertTrue(automationPracticeForm.isStudentRegistered(studentFirstName,
-                studentLastName, studentEmail, phoneNumber, studentAddress, dayOfBirthday,
-                monthOfBirthday, yearOfBirthday));
+        System.out.println(automationPracticeForm.registrationTable);
+        Assertions.assertTrue(automationPracticeForm.isStudentRegistered(
+                studentFirstName,
+                studentLastName,
+                studentEmail,
+                phoneNumber,
+                male,
+                hobby,
+                subject,
+                studentAddress,
+                state,
+                city,
+                dayOfBirthday,
+                monthOfBirthday,
+                yearOfBirthday));
     }
 
     @Disabled
