@@ -2,10 +2,10 @@ package com.demoqa.pageobject;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.demoqa.testdata.FakerTestData;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class AutomationPracticeForm {
 
@@ -20,7 +20,7 @@ public class AutomationPracticeForm {
     SelenideElement birthdayInput = $("#dateOfBirthInput");
     SelenideElement yearDropDownList = $("[class=react-datepicker__year-select]");
     SelenideElement monthDropDownList = $("[class=react-datepicker__month-select]");
-    SelenideElement dayElement = $(byText("1"));
+//    SelenideElement dayElement = $x("//div[@class='react-datepicker__week']//div[text()='"+dayOfBirthday+"']");
     SelenideElement subjectsInput = $("#subjectsInput");
     SelenideElement readingRadio = $(byText("Reading"));
     SelenideElement uploadPictureButton = $("#uploadPicture");
@@ -46,15 +46,20 @@ public class AutomationPracticeForm {
         femaleRadio.click();
         return Selenide.page(AutomationPracticeForm.class);
     }
-    public AutomationPracticeForm setPhone(String studentPhoneNumber){
-        phoneInput.setValue(studentPhoneNumber);
+    public AutomationPracticeForm setPhone(String phoneNumber){
+        phoneInput.setValue(phoneNumber);
         return Selenide.page(AutomationPracticeForm.class);
     }
-    public AutomationPracticeForm setBirthday(){
+    public AutomationPracticeForm setDay(String dayOfBirthday){
+        $x("//div[@class='react-datepicker__week']//div[text()='"+dayOfBirthday+"']").click();
+        return Selenide.page(AutomationPracticeForm.class);
+    }
+
+    public AutomationPracticeForm setBirthday(String dayOfBirthday, String monthOfBirthday, String yearOfBirthday){
         birthdayInput.click();
-        yearDropDownList.selectOption("1991");
-        monthDropDownList.selectOption("March");
-        dayElement.click();
+        yearDropDownList.selectOption(yearOfBirthday);
+        monthDropDownList.selectOption(monthOfBirthday);
+        setDay(dayOfBirthday);
         return Selenide.page(AutomationPracticeForm.class);
     }
     public AutomationPracticeForm setSubject(){
@@ -86,5 +91,27 @@ public class AutomationPracticeForm {
     public AutomationPracticeForm submit(){
         submitButton.click();
         return Selenide.page(AutomationPracticeForm.class);
+    }
+    public String getRegistrationTable() {
+        return registrationTable.getText();
+    }
+    public boolean isStudentRegistered(String studentFirstName,
+                                       String studentLastName,
+                                       String studentEmail,
+                                       String phoneNumber,
+                                       String studentAddress,
+                                       String dayOfBirthday,
+                                       String monthOfBirthday,
+                                       String yearOfBirthday){
+        return getRegistrationTable().contains("Student Name" + " " + studentFirstName + " " + studentLastName +
+                "\nStudent Email" + " " + studentEmail +
+                "\nGender Female\n" +
+                "Mobile" + " " + phoneNumber +
+                "\nDate of Birth " + dayOfBirthday + " " + monthOfBirthday + "," + yearOfBirthday +
+                "\nSubjects History\n" +
+                "Hobbies Reading\n" +
+                "Picture picture.png\n" +
+                "Address" + " " + studentAddress +
+                "\nState and City Haryana Karnal");
     }
 }
