@@ -1,9 +1,9 @@
 package com.demoqa;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
 import com.demoqa.pageobject.AutomationPracticeForm;
 import com.demoqa.testdata.FakerTestData;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -23,19 +23,38 @@ public class FormTests {
     public String studentFirstName;
     public String studentLastName;
     public String studentEmail;
-    public String studentPhoneNumber;
+    public String male;
+    public String phoneNumber;
+    public String hobby;
+    public String subject;
     public String studentAddress;
+    public String dayOfBirthday;
+    public String monthOfBirthday;
+    public String yearOfBirthday;
+    public String state;
+    public String city;
+    public String fileName;
+
 
     @BeforeEach
     public void setUp(){
         Configuration.browserSize = "1920x1080";
         student = new FakerTestData();
-        Map<String, String> studentMap = student.generateMap();
+        Map<String, String> studentMap = student.generateMap(); 
         studentFirstName = studentMap.get("Student firstName");
         studentLastName = studentMap.get("Student lastName");
         studentEmail = studentMap.get("Student Email");
-        studentPhoneNumber = studentMap.get("Mobile");
+        male = studentMap.get("Male");
+        phoneNumber = studentMap.get("Mobile");
+        fileName = "picture.png";
+        hobby = studentMap.get("Hobbie");
+        subject = studentMap.get("Subject");
         studentAddress = studentMap.get("Address");
+        state = studentMap.get("State");
+        city = studentMap.get("City");
+        dayOfBirthday = studentMap.get("Birthday day");
+        monthOfBirthday = studentMap.get("Birthday month");
+        yearOfBirthday = studentMap.get("Birthday year");
     }
 
     @Test
@@ -43,28 +62,30 @@ public class FormTests {
         AutomationPracticeForm automationPracticeForm = open(AutomationPracticeForm.FORM_PAGE, AutomationPracticeForm.class)
                 .setName(studentFirstName, studentLastName)
                 .setEmail(studentEmail)
-                .setFemale()
-                .setPhone(studentPhoneNumber)
-                .setBirthday()
-                .setSubject()
-                .setReadingHobby()
-                .uploadPicture()
+                .setMale(male)
+                .setPhone(phoneNumber)
+                .setBirthday(dayOfBirthday, monthOfBirthday, yearOfBirthday)
+                .setSubject(subject)
+                .setHobby(hobby)
+                .uploadPicture(fileName)
                 .setAddress(studentAddress)
-                .setState()
-                .setCity()
+                .setState(state)
+                .setCity(city)
                 .submit();
-
-        automationPracticeForm.registrationTable.shouldHave(
-                text("Student Name" + " " + studentFirstName + " " + studentLastName +
-                        "\nStudent Email" + " " + studentEmail +
-                        "\nGender Female\n" +
-                        "Mobile" + " " + studentPhoneNumber +
-                        "\nDate of Birth 01 March,1991\n" +
-                        "Subjects History\n" +
-                        "Hobbies Reading\n" +
-                        "Picture picture.png\n" +
-                        "Address" + " " + studentAddress +
-                        "\nState and City Haryana Karnal"));
+        Assertions.assertTrue(automationPracticeForm.isStudentRegistered(
+                studentFirstName,
+                studentLastName,
+                studentEmail,
+                phoneNumber,
+                male,
+                hobby,
+                subject,
+                studentAddress,
+                state,
+                city,
+                dayOfBirthday,
+                monthOfBirthday,
+                yearOfBirthday));
     }
 
     @Disabled

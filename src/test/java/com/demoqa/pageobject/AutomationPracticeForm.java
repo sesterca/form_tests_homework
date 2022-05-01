@@ -2,10 +2,8 @@ package com.demoqa.pageobject;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.demoqa.testdata.FakerTestData;
 
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.*;
 
 public class AutomationPracticeForm {
 
@@ -15,20 +13,17 @@ public class AutomationPracticeForm {
     SelenideElement firstNameInput = $("#firstName");
     SelenideElement lastNameInput = $("#lastName");
     SelenideElement emailInput = $("#userEmail");
-    SelenideElement femaleRadio = $(byText("Female"));
     SelenideElement phoneInput = $("#userNumber");
     SelenideElement birthdayInput = $("#dateOfBirthInput");
     SelenideElement yearDropDownList = $("[class=react-datepicker__year-select]");
     SelenideElement monthDropDownList = $("[class=react-datepicker__month-select]");
-    SelenideElement dayElement = $(byText("1"));
     SelenideElement subjectsInput = $("#subjectsInput");
-    SelenideElement readingRadio = $(byText("Reading"));
     SelenideElement uploadPictureButton = $("#uploadPicture");
     SelenideElement addressTextArea = $("#currentAddress");
     SelenideElement stateDropDownList = $("#state");
-    SelenideElement stateElement = $("#react-select-3-option-2");
+//    SelenideElement stateElement = $("#react-select-3-option-2");
     SelenideElement cityDropDownList = $("#city");
-    SelenideElement cityElement = $("#react-select-4-option-0");
+//    SelenideElement cityElement = $("#react-select-4-option-0");
     SelenideElement submitButton = $("#submit");
     public SelenideElement registrationTable = $(".table-responsive");
 
@@ -42,49 +37,82 @@ public class AutomationPracticeForm {
         emailInput.setValue(studentEmail);
         return Selenide.page(AutomationPracticeForm.class);
     }
-    public AutomationPracticeForm setFemale(){
-        femaleRadio.click();
+
+    public AutomationPracticeForm setMale(String male){
+        $x("//div[input[@name='gender']]//label[text()='"+male+"']").click();
         return Selenide.page(AutomationPracticeForm.class);
     }
-    public AutomationPracticeForm setPhone(String studentPhoneNumber){
-        phoneInput.setValue(studentPhoneNumber);
+    public AutomationPracticeForm setPhone(String phoneNumber){
+        phoneInput.setValue(phoneNumber);
         return Selenide.page(AutomationPracticeForm.class);
     }
-    public AutomationPracticeForm setBirthday(){
+    public AutomationPracticeForm setDay(String dayOfBirthday){
+        $x("//div[@class='react-datepicker__week']//div[text()='"+dayOfBirthday+"']").click();
+        return Selenide.page(AutomationPracticeForm.class);
+    }
+
+    public AutomationPracticeForm setBirthday(String dayOfBirthday, String monthOfBirthday, String yearOfBirthday){
         birthdayInput.click();
-        yearDropDownList.selectOption("1991");
-        monthDropDownList.selectOption("March");
-        dayElement.click();
+        yearDropDownList.selectOption(yearOfBirthday);
+        monthDropDownList.selectOption(monthOfBirthday);
+        setDay(dayOfBirthday);
         return Selenide.page(AutomationPracticeForm.class);
     }
-    public AutomationPracticeForm setSubject(){
-        subjectsInput.setValue("History").pressEnter();
+    public AutomationPracticeForm setSubject(String subject){
+        subjectsInput.setValue(subject).pressEnter();
         return Selenide.page(AutomationPracticeForm.class);
     }
-    public AutomationPracticeForm setReadingHobby(){
-        readingRadio.click();
+    public AutomationPracticeForm setHobby(String hobby){
+        $x("//div[input [@type='checkbox']]/label[text()='"+hobby+"']").click();
         return Selenide.page(AutomationPracticeForm.class);
     }
-    public AutomationPracticeForm uploadPicture(){
-        uploadPictureButton.uploadFromClasspath("picture.png");
+    public AutomationPracticeForm uploadPicture(String fileName){
+        uploadPictureButton.uploadFromClasspath(fileName);
         return Selenide.page(AutomationPracticeForm.class);
     }
     public AutomationPracticeForm setAddress(String studentAddress){
         addressTextArea.setValue(studentAddress);
         return Selenide.page(AutomationPracticeForm.class);
     }
-    public AutomationPracticeForm setState(){
+    public AutomationPracticeForm setState(String state){
         stateDropDownList.click();
-        stateElement.click();
+        $x("//div[contains(text(), '"+state+"')]").click();
         return Selenide.page(AutomationPracticeForm.class);
     }
-    public AutomationPracticeForm setCity(){
+    public AutomationPracticeForm setCity(String city){
         cityDropDownList.click();
-        cityElement.click();
+        $x("//div[contains(text(), '"+city+"')]").click();
         return Selenide.page(AutomationPracticeForm.class);
     }
     public AutomationPracticeForm submit(){
         submitButton.click();
         return Selenide.page(AutomationPracticeForm.class);
+    }
+    public String getRegistrationTable() {
+        return registrationTable.getText();
+    }
+    public boolean isStudentRegistered(String studentFirstName,
+                                       String studentLastName,
+                                       String studentEmail,
+                                       String phoneNumber,
+                                       String male,
+                                       String hobby,
+                                       String subject,
+                                       String studentAddress,
+                                       String state,
+                                       String city,
+                                       String dayOfBirthday,
+                                       String monthOfBirthday,
+                                       String yearOfBirthday){
+        return getRegistrationTable().contains("Student Name " + studentFirstName + " " + studentLastName +
+                "\nStudent Email " + studentEmail +
+                "\nGender " + male +
+                "\nMobile " + phoneNumber +
+                "\nDate of Birth " + dayOfBirthday + " " + monthOfBirthday + "," + yearOfBirthday +
+                "\nSubjects " + subject +
+                "\nHobbies " + hobby +
+                "\nPicture picture.png" +
+                "\nAddress " + studentAddress +
+                "\nState and City " + state + " " + city);
     }
 }
