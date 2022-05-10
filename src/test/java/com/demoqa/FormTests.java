@@ -1,6 +1,7 @@
 package com.demoqa;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.demoqa.pageobject.AutomationPracticeForm;
 import com.demoqa.testdata.FakerTestData;
@@ -66,7 +67,7 @@ public class FormTests {
 
         SelenideLogger.addListener("allure", new AllureSelenide());
 
-        AutomationPracticeForm automationPracticeForm = open(AutomationPracticeForm.FORM_PAGE, AutomationPracticeForm.class)
+        AutomationPracticeForm form = open(AutomationPracticeForm.FORM_PAGE, AutomationPracticeForm.class)
                 .setName(studentFirstName, studentLastName)
                 .setEmail(studentEmail)
                 .setMale(male)
@@ -79,20 +80,16 @@ public class FormTests {
                 .setState(state)
                 .setCity(city)
                 .submit();
-        Assertions.assertTrue(automationPracticeForm.isStudentRegistered(
-                studentFirstName,
-                studentLastName,
-                studentEmail,
-                phoneNumber,
-                male,
-                hobby,
-                subject,
-                studentAddress,
-                state,
-                city,
-                dayOfBirthday,
-                monthOfBirthday,
-                yearOfBirthday));
+        form.tableName.shouldHave(text(studentFirstName + " " + studentLastName));
+        form.tableEmail.shouldHave(text(studentEmail));
+        form.tableGender.shouldHave(text(male));
+        form.tableMobile.shouldHave(text(phoneNumber));
+        form.tableDateOfBirth.shouldHave(text(dayOfBirthday + " " + monthOfBirthday + "," + yearOfBirthday));
+        form.tableSubjects.shouldHave(text(subject));
+        form.tableHobbies.shouldHave(text(hobby));
+        form.tablePicture.shouldHave(text(fileName));
+        form.tableAddress.shouldHave(text(studentAddress));
+        form.tableStateAndCity.shouldHave(text(state + " " + city));
     }
 
     @Disabled
