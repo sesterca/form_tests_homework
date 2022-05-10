@@ -1,7 +1,5 @@
 package com.demoqa;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.demoqa.pageobject.AutomationPracticeForm;
 import com.demoqa.testdata.FakerTestData;
@@ -64,8 +62,6 @@ public class FormTests extends BaseTest{
     @Test
     public void automaticPracticeFormPageObjectTest(){
 
-        SelenideLogger.addListener("allure", new AllureSelenide());
-
         AutomationPracticeForm form = open(AutomationPracticeForm.FORM_PAGE, AutomationPracticeForm.class)
                 .setName(studentFirstName, studentLastName)
                 .setEmail(studentEmail)
@@ -79,6 +75,7 @@ public class FormTests extends BaseTest{
                 .setState(state)
                 .setCity(city)
                 .submit();
+
         form.tableName.shouldHave(text(studentFirstName + " " + studentLastName));
         form.tableEmail.shouldHave(text(studentEmail));
         form.tableGender.shouldHave(text(male));

@@ -4,8 +4,9 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selectors.byTagAndText;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class AutomationPracticeForm {
 
@@ -111,30 +112,5 @@ public class AutomationPracticeForm {
     }
     public String getRegistrationTable() {
         return registrationTable.getText();
-    }
-    @Step("Assert student registered")
-    public boolean isStudentRegistered(String studentFirstName,
-                                       String studentLastName,
-                                       String studentEmail,
-                                       String phoneNumber,
-                                       String male,
-                                       String hobby,
-                                       String subject,
-                                       String studentAddress,
-                                       String state,
-                                       String city,
-                                       String dayOfBirthday,
-                                       String monthOfBirthday,
-                                       String yearOfBirthday){
-        return getRegistrationTable().contains("Student Name " + studentFirstName + " " + studentLastName +
-                "\nStudent Email " + studentEmail +
-                "\nGender " + male +
-                "\nMobile " + phoneNumber +
-                "\nDate of Birth " + dayOfBirthday + " " + monthOfBirthday + "," + yearOfBirthday +
-                "\nSubjects " + subject +
-                "\nHobbies " + hobby +
-                "\nPicture picture.png" +
-                "\nAddress " + studentAddress +
-                "\nState and City " + state + " " + city);
     }
 }
