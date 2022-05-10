@@ -1,12 +1,13 @@
 package com.demoqa;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
 import com.demoqa.pageobject.AutomationPracticeForm;
 import com.demoqa.testdata.FakerTestData;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.*;
 
 import java.time.Duration;
 import java.util.Map;
@@ -57,8 +58,14 @@ public class FormTests {
         yearOfBirthday = studentMap.get("Birthday year");
     }
 
+    @Tag("execute")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Student's successful registration")
     @Test
     public void automaticPracticeFormPageObjectTest(){
+
+        SelenideLogger.addListener("allure", new AllureSelenide());
+
         AutomationPracticeForm automationPracticeForm = open(AutomationPracticeForm.FORM_PAGE, AutomationPracticeForm.class)
                 .setName(studentFirstName, studentLastName)
                 .setEmail(studentEmail)
