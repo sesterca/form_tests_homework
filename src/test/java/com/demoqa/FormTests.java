@@ -19,7 +19,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class FormTests {
+public class FormTests extends BaseTest{
 
     private FakerTestData student;
     public String studentFirstName;
@@ -40,7 +40,6 @@ public class FormTests {
 
     @BeforeEach
     public void setUp(){
-        Configuration.browserSize = "1920x1080";
         student = new FakerTestData();
         Map<String, String> studentMap = student.generateMap(); 
         studentFirstName = studentMap.get("Student firstName");
