@@ -4,6 +4,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class AutomationPracticeForm {
@@ -22,11 +23,20 @@ public class AutomationPracticeForm {
     SelenideElement uploadPictureButton = $("#uploadPicture");
     SelenideElement addressTextArea = $("#currentAddress");
     SelenideElement stateDropDownList = $("#state");
-//    SelenideElement stateElement = $("#react-select-3-option-2");
     SelenideElement cityDropDownList = $("#city");
-//    SelenideElement cityElement = $("#react-select-4-option-0");
     SelenideElement submitButton = $("#submit");
     public SelenideElement registrationTable = $(".table-responsive");
+
+    public SelenideElement tableName = $(byTagAndText("td","Student Name")).sibling(0);
+    public SelenideElement tableEmail = $(byTagAndText("td","Student Email")).sibling(0);
+    public SelenideElement tableGender = $(byTagAndText("td","Gender")).sibling(0);
+    public SelenideElement tableMobile = $(byTagAndText("td","Mobile")).sibling(0);
+    public SelenideElement tableDateOfBirth = $(byTagAndText("td","Date of Birth")).sibling(0);
+    public SelenideElement tableSubjects = $(byTagAndText("td","Subjects")).sibling(0);
+    public SelenideElement tableHobbies = $(byTagAndText("td","Hobbies")).sibling(0);
+    public SelenideElement tablePicture = $(byTagAndText("td","Picture")).sibling(0);
+    public SelenideElement tableAddress = $(byTagAndText("td","Address")).sibling(0);
+    public SelenideElement tableStateAndCity = $(byTagAndText("td","State and City")).sibling(0);
 
     //methods
     @Step("Set student's full name")
