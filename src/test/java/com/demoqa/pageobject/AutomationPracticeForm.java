@@ -2,6 +2,7 @@ package com.demoqa.pageobject;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -28,20 +29,23 @@ public class AutomationPracticeForm {
     public SelenideElement registrationTable = $(".table-responsive");
 
     //methods
+    @Step("Set student's full name")
     public AutomationPracticeForm setName(String studentFirstName, String studentLastName){
         firstNameInput.setValue(studentFirstName);
         lastNameInput.setValue(studentLastName);
         return Selenide.page(AutomationPracticeForm.class);
     }
+    @Step("Set student's email")
     public AutomationPracticeForm setEmail(String studentEmail){
         emailInput.setValue(studentEmail);
         return Selenide.page(AutomationPracticeForm.class);
     }
-
+    @Step("Set student's male")
     public AutomationPracticeForm setMale(String male){
         $x("//div[input[@name='gender']]//label[text()='"+male+"']").click();
         return Selenide.page(AutomationPracticeForm.class);
     }
+    @Step("Set student's phone")
     public AutomationPracticeForm setPhone(String phoneNumber){
         phoneInput.setValue(phoneNumber);
         return Selenide.page(AutomationPracticeForm.class);
@@ -50,7 +54,7 @@ public class AutomationPracticeForm {
         $x("//div[@class='react-datepicker__week']//div[text()='"+dayOfBirthday+"']").click();
         return Selenide.page(AutomationPracticeForm.class);
     }
-
+    @Step ("Set student's birthday")
     public AutomationPracticeForm setBirthday(String dayOfBirthday, String monthOfBirthday, String yearOfBirthday){
         birthdayInput.click();
         yearDropDownList.selectOption(yearOfBirthday);
@@ -58,32 +62,39 @@ public class AutomationPracticeForm {
         setDay(dayOfBirthday);
         return Selenide.page(AutomationPracticeForm.class);
     }
+    @Step("Set student's favourite subjects")
     public AutomationPracticeForm setSubject(String subject){
         subjectsInput.setValue(subject).pressEnter();
         return Selenide.page(AutomationPracticeForm.class);
     }
+    @Step("Set student's hobby")
     public AutomationPracticeForm setHobby(String hobby){
         $x("//div[input [@type='checkbox']]/label[text()='"+hobby+"']").click();
         return Selenide.page(AutomationPracticeForm.class);
     }
+    @Step("Upload picture")
     public AutomationPracticeForm uploadPicture(String fileName){
         uploadPictureButton.uploadFromClasspath(fileName);
         return Selenide.page(AutomationPracticeForm.class);
     }
+    @Step("Set student's address")
     public AutomationPracticeForm setAddress(String studentAddress){
         addressTextArea.setValue(studentAddress);
         return Selenide.page(AutomationPracticeForm.class);
     }
+    @Step("Set state")
     public AutomationPracticeForm setState(String state){
         stateDropDownList.click();
         $x("//div[contains(text(), '"+state+"')]").click();
         return Selenide.page(AutomationPracticeForm.class);
     }
+    @Step("Set city")
     public AutomationPracticeForm setCity(String city){
         cityDropDownList.click();
         $x("//div[contains(text(), '"+city+"')]").click();
         return Selenide.page(AutomationPracticeForm.class);
     }
+    @Step("Press Submit-button")
     public AutomationPracticeForm submit(){
         submitButton.click();
         return Selenide.page(AutomationPracticeForm.class);
@@ -91,6 +102,7 @@ public class AutomationPracticeForm {
     public String getRegistrationTable() {
         return registrationTable.getText();
     }
+    @Step("Assert student registered")
     public boolean isStudentRegistered(String studentFirstName,
                                        String studentLastName,
                                        String studentEmail,
