@@ -1,11 +1,9 @@
 package com.demoqa;
 
-import com.codeborne.selenide.logevents.SelenideLogger;
 import com.demoqa.pageobject.AutomationPracticeForm;
 import com.demoqa.testdata.FakerTestData;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 
 import java.time.Duration;
