@@ -47,9 +47,13 @@ tasks.withType(Test) {
         }
     }
 }
+task systemProperties(type: Test){
+    useJUnitPlatform{
+        includeTags "systemProperties"}
+}
 
-//task demoqa_tests(type: Test) {
-//    useJUnitPlatform{
-//        includeTags "demoqa"
-//    }
-//
+task demoqa_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags "demoqa"
+    }
+}

@@ -54,7 +54,7 @@ public class FormTests extends BaseTest{
         yearOfBirthday = studentMap.get("Birthday year");
     }
 
-    @Tag("execute")
+    @Tag("demoqa")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Student's successful registration")
     @Test
