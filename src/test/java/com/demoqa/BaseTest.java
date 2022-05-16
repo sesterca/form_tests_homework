@@ -19,7 +19,7 @@ public class BaseTest {
 
         System.getProperty("browser");
         System.getProperty("browserSize");
-        String remote = System.getProperty("remote");
+        String remote = System.getProperty("remoteAddress");
 
         String login = config.login();
         String password = config.password();
