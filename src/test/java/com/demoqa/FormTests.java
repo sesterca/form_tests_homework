@@ -15,6 +15,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
+@Tag("systemProperties")
 public class FormTests extends BaseTest{
 
     private FakerTestData student;
