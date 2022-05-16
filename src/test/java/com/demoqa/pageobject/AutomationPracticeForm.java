@@ -2,15 +2,17 @@ package com.demoqa.pageobject;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import com.demoqa.BaseTest;
 import io.qameta.allure.Step;
 
+import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class AutomationPracticeForm {
 
-    public static final String FORM_PAGE = "https://demoqa.com/automation-practice-form";
+    public static final String FORM_PAGE = baseUrl + "/automation-practice-form";
 
     //locators
     SelenideElement firstNameInput = $("#firstName");

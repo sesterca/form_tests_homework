@@ -14,20 +14,23 @@ public class BaseTest {
 
     @BeforeAll
     static void config(){
+
         CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class);
-        SelenideLogger.addListener("allure", new AllureSelenide());
-
-        System.getProperty("browser");
-        System.getProperty("browserSize");
-        String remote = System.getProperty("remoteAddress");
-
         String login = config.login();
         String password = config.password();
 
-        String remoteAddress = "https://" + login + ":" + password + remote;
+        String baseUrl = System.getProperty("baseUrl", "https://demoqa.com");
+        String browser = System.getProperty("browser", "chrome");
+        String browserSize = System.getProperty("browserSize", "1920x1080");
+        String server = System.getProperty("server", "selenoid.autotests.cloud");
+        String remoteAddress = "https://" + login + ":" + password + "@" + server + "/wd/hub";
 
-//        Configuration.browserSize = "1920x1080";
+        Configuration.baseUrl = baseUrl;
+        Configuration.browser = browser;
+        Configuration.browserSize = browserSize;
         Configuration.remote = remoteAddress;
+
+        SelenideLogger.addListener("allure", new AllureSelenide());
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
@@ -43,3 +46,6 @@ public class BaseTest {
         Attachments.addVideo();
     }
 }
+
+//https://user1:1234@selenoid.autotests.cloud/wd/hub
+//https://selenoid.autotests.cloud/video/
