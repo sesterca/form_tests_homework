@@ -16,6 +16,8 @@ public class BaseTest {
     static void config(){
 
         CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class);
+        SelenideLogger.addListener("allure", new AllureSelenide());
+
         String login = config.login();
         String password = config.password();
 
@@ -29,8 +31,6 @@ public class BaseTest {
         Configuration.browser = browser;
         Configuration.browserSize = browserSize;
         Configuration.remote = remoteAddress;
-
-        SelenideLogger.addListener("allure", new AllureSelenide());
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
