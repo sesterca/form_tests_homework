@@ -52,7 +52,7 @@ task systemProperties(type: Test){
         includeTags "systemProperties"}
 }
 
-task demoqa_tests(type: Test) {
+task demoqa(type: Test) {
     useJUnitPlatform {
         includeTags "demoqa"
     }
