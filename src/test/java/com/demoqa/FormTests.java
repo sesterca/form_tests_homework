@@ -12,8 +12,7 @@ import java.util.Map;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 @Tag("systemProperties")
 public class FormTests extends BaseTest{
@@ -60,8 +59,11 @@ public class FormTests extends BaseTest{
     @Test
     public void automaticPracticeFormPageObjectTest(){
 
-        AutomationPracticeForm form = open(AutomationPracticeForm.FORM_PAGE, AutomationPracticeForm.class)
-                .setName(studentFirstName, studentLastName)
+        AutomationPracticeForm form = open(AutomationPracticeForm.FORM_PAGE, AutomationPracticeForm.class);
+        executeJavaScript("$('footer').remove()");
+        executeJavaScript("$('#fixedban').remove()");
+
+        form.setName(studentFirstName, studentLastName)
                 .setEmail(studentEmail)
                 .setMale(male)
                 .setPhone(phoneNumber)
