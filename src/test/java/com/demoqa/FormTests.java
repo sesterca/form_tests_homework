@@ -15,7 +15,6 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-@Tag("systemProperties")
 public class FormTests extends BaseTest{
 
     private FakerTestData student;
@@ -55,7 +54,7 @@ public class FormTests extends BaseTest{
         yearOfBirthday = studentMap.get("Birthday year");
     }
 
-    @Tag("demoqa")
+//    @Tag("demoqa")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Student's successful registration")
     @Test

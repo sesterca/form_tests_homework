@@ -17,22 +17,23 @@ public class BaseTest {
     @BeforeAll
     static void config(){
 
-        CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class);
+//        CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class);
         SelenideLogger.addListener("allure", new AllureSelenide());
 
-        String login = config.login();
-        String password = config.password();
+//        String login = config.login();
+//        String password = config.password();
 
         String baseUrl = System.getProperty("baseUrl", "https://demoqa.com");
         String browser = System.getProperty("browser", "chrome");
         String browserSize = System.getProperty("browserSize", "1920x1080");
-        String server = System.getProperty("server", "selenoid.autotests.cloud");
-        String remoteAddress = "https://" + login + ":" + password + "@" + server + "/wd/hub";
+//        String server = System.getProperty("server", "selenoid.autotests.cloud");
+//        String remoteAddress = "https://" + login + ":" + password + "@" + server + "/wd/hub";
 
         Configuration.baseUrl = baseUrl;
         Configuration.browser = browser;
         Configuration.browserSize = browserSize;
-        Configuration.remote = remoteAddress;
+        Configuration.browserPosition="0x0";
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
